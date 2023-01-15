@@ -1,0 +1,135 @@
+/*!
+Theme Name: wisus
+Theme URI: http://underscores.me/
+Author: Jesus Avelar
+Author URI: http://wisus.dev
+Description: My Theme
+Version: 1.0.0
+Tested up to: 5.4
+Requires PHP: 5.6
+License: GNU General Public License v2 or later
+License URI: LICENSE
+Text Domain: wisus
+Tags: custom-background, custom-logo, custom-menu, featured-images, threaded-comments, translation-ready
+
+This theme, like WordPress, is licensed under the GPL.
+Use it to make something cool, have fun, and share what you've learned.
+
+wisus is based on Underscores https://underscores.me/, (C) 2012-2020 Automattic, Inc.
+Underscores is distributed under the terms of the GNU GPL v2 or later.
+
+Normalizing styles have been helped along thanks to the fine work of
+Nicolas Gallagher and Jonathan Neal https://necolas.github.io/normalize.css/
+*/
+
+.header-title-page {
+	display: none;
+}
+
+.gradient-bg {
+	background-image: linear-gradient(to right top, #ff5445, #ff4754, #ff3a63, #ff2f73, #ff2683, #f9218e, #f22098, #e923a3, #db26a9, #cd2aae, #bd2fb2, #ac33b6);
+}
+
+.vh-25 {
+	min-height: 25vh !important;
+}
+
+.vh-50 {
+	min-height: 50vh !important;
+}
+
+.mt-7em-menus {
+	margin-top: -7em;
+}
+
+.border-circle-img {
+	border: 8px solid white;
+}
+
+.logo-navbar {
+	max-width: 52px;
+	height: auto;
+}
+
+.header-primary {
+	min-height: 28.5em;
+}
+
+.bg-purple {
+	background-color: #f8f5fd;
+}
+
+.bg-light-gray {
+	background-color: #f7f7f7;
+}
+
+.box-container {
+	border-radius: 4px;
+	display: inline-block;
+	text-align: center;
+	padding: 20px 60px;
+}
+
+.image-post .post-thumbnail img {
+	display: block;
+	transition: transform .5s ease;
+}
+
+.image-post .post-thumbnail:hover img {
+	transform: scale(1.2);
+}
+
+
+.recent-post-widget li {
+	padding-top: 2em;
+}
+
+.recent-post-widget li:first-child  {
+	padding-top: 1em;
+}
+
+.recent-post-widget li div a img {
+	border-radius: 4px;
+}
+
+.search-form div {
+	border-radius: 4px;
+}
+
+.widget-list {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+.comment-edit-link, .comment-reply-link, .author-link .url {
+	text-decoration: none;
+}
+
+.author-link {
+	font-style: normal;
+}
+
+.comment-edit-link, .comment-reply-link {
+	background-color: #0d6efd;
+	border-color: #0d6efd;
+	border-radius: 4px;
+	color: #f7f7f7;
+	padding: 0 10px;
+}
+
+.comment-edit-link:hover, .comment-reply-link:hover {
+	background-color: #0b5ed7;
+	border-color: #0b5ed7;
+	color: #f7f7f7;
+}
+
+.comment-form-cookies-consent label {
+	display: inline;
+}
+
+.comment-respond {
+	background-color: #fff;
+	border-radius: 4px;
+	padding: 20px;
+}
