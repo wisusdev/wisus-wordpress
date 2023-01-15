@@ -133,3 +133,21 @@ Nicolas Gallagher and Jonathan Neal https://necolas.github.io/normalize.css/
 	border-radius: 4px;
 	padding: 20px;
 }
+
+.comment-reply-title {
+	display: flex;
+	justify-content: space-between;
+}
+
+#cancel-comment-reply-link {
+	background-color: var(--bs-red);
+	border-color: var(--bs-red);
+	border-radius: 4px;
+	color: var(--bs-white);
+	padding: 0 10px;
+	text-decoration: none;
+}
+
+.depth-2 {
+	padding: 20px;
+}
