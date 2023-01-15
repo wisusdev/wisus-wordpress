@@ -237,7 +237,7 @@ function better_comments( $comment, $args, $depth ) {
 				?>
 			</div>
 
-			<div class="card-footer">
+			<div class="card-footer bg-white border-0">
 				<div class="reply float-end">
 					<?php
 						// Display comment reply link
