@@ -45,12 +45,16 @@
 					the_custom_logo(['class' => 'img-fluid']);
 
 					if ( is_front_page() && is_home() ) :
-						?>
-						<h1 class="site-title"><?php bloginfo( 'name' ); ?></h1>
+					?>
+						<h1 class="site-title">
+							<a href="<?php echo home_url() ?>" class="text-decoration-none text-black"><?php bloginfo( 'name' ); ?></a>
+						</h1>
 					<?php
 					else :
-						?>
-						<p class="site-title navbar-brand m-0 fw-bold"><?php bloginfo( 'name' ); ?></p>
+					?>
+						<p class="site-title navbar-brand m-0 fw-bold">
+							<a href="<?php echo home_url() ?>" class="text-decoration-none text-black"><?php bloginfo( 'name' ); ?></a>
+						</p>
 					<?php
 					endif;
 					$wisus_description = get_bloginfo( 'description', 'display' );
