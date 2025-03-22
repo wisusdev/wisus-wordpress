@@ -1,0 +1,20 @@
+{
+    "$schema": "https://schemas.wp.org/trunk/block.json",
+    "apiVersion": 2,
+    "name": "wisus/custom-block",
+    "title": "Wisus Blog Block",
+    "category": "widgets",
+    "icon": "admin-post",
+    "description": "Un bloque personalizado para mostrar blogs.",
+    "attributes": {
+        "postsPerPage": {
+            "type": "number",
+            "default": 6
+        },
+        "columns": {
+            "type": "number",
+            "default": 3
+        }
+    },
+    "editorScript": "file:./custom-block.js"
+}

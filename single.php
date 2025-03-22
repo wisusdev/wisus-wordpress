@@ -4,53 +4,37 @@
  *
  * @link https://developer.wordpress.org/themes/basics/template-hierarchy/#single-post
  *
- * @package lewer
+ * @package wisus
  */
 
 get_header();
 ?>
-	<!-- Cargamos el blog -->
-	<main id="primary" class="site-main blog py-5">
-		<div class="container">
-			<div class="row">
-				<div class="col-md-8">
-					<?php
-					while ( have_posts() ) :
-						the_post();
 
-						get_template_part( 'template-parts/content', 'blog' );
-						?>
+    <main id="primary" class="site-main single-container container py-4">
 
-						<div class="d-grid gap-2 d-md-flex justify-content-between py-5">
-							<div><?php echo get_next_post_link('%link') ?></div>
-							<div><?php echo get_previous_post_link('%link') ?></div>
-						</div>
+        <?php
+        while ( have_posts() ) :
+            the_post();
 
-						<?php
-						// If comments are open or we have at least one comment, load up the comment template.
-						if ( comments_open() || get_comments_number() ) :
-							comments_template();
-						endif;
+            get_template_part( 'template-parts/content' );
 
-						// Se registra la visita a este post
-						setPostViews(get_the_ID());
-
-					endwhile; // End of the loop.
-					?>
+            ?>
+				<div class="d-grid gap-2 d-flex justify-content-between p-3 bg-body-secondary rounded mb-3">
+					<div><?php echo get_next_post_link('%link') ?></div>
+					<div><?php echo get_previous_post_link('%link') ?></div>
 				</div>
-				<div class="col-md-4">
-					<div class="position-sticky" style="top: 4rem;">
-						<div class="p-4 bg-light rounded">
-							<?php get_sidebar() ?>
-						</div>
-					</div>
-				</div>
-			</div>
+			<?php
 
+            // If comments are open or we have at least one comment, load up the comment template.
+            if ( comments_open() || get_comments_number() ) :
+                comments_template();
+            endif;
 
-		</div>
-	</main><!-- #main -->
+        endwhile; // End of the loop.
+        ?>
+
+    </main><!-- #main -->
 
 <?php
-
+get_sidebar();
 get_footer();

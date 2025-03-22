@@ -20,7 +20,7 @@ if ( post_password_required() ) {
 }
 ?>
 
-<div id="comments" class="comments-area py-5 px-3 bg-light rounded">
+<div id="comments" class="comments-area py-3 px-3 bg-body-secondary rounded">
 	<div class="">
 
 

@@ -9,35 +9,55 @@
 
 ?>
 
-<div id="post-<?php the_ID(); ?>" <?php post_class('col-md-4 mb-3'); ?>>
-	<div class="card h-100 shadow ">
-		<div class="card-header">
-			<?php if ( 'post' === get_post_type() ) : ?>
-				<p class="text-capitalize m-1 fw-bold"><?php the_time(get_option('date_format')); ?></p><!-- .entry-meta -->
-			<?php endif; ?>
-		</div>
+<article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
+	<header class="entry-header">
+		<?php
+		if ( is_singular() ) :
+			the_title( '<h1 class="entry-title">', '</h1>' );
+		else :
+			the_title( '<h2 class="entry-title"><a href="' . esc_url( get_permalink() ) . '" rel="bookmark">', '</a></h2>' );
+		endif;
 
-		<div class="overflow-hidden p-0 image-post">
-			<?php wisus_post_thumbnail(); ?>
-		</div>
-
-		<div class="card-body">
-			<?php
-			if ( is_singular() ) :
-				the_title( '<p class="entry-title card-title fw-bold"><a href="' . esc_url( get_permalink() ) . '" rel="bookmark" class="text-decoration-none text-black">', '</a></p>' );
-			else :
-				the_title( '<p class="my-3 fw-bold"><a href="' . esc_url( get_permalink() ) . '" rel="bookmark" class="text-decoration-none text-black">', '</a></p>' );
-			endif;
-
+		if ( 'post' === get_post_type() ) :
 			?>
+			<div class="entry-meta my-3">
+				<?php
+					wisus_posted_on();
+					wisus_posted_by();
+				?>
+			</div><!-- .entry-meta -->
+		<?php endif; ?>
+	</header><!-- .entry-header -->
 
-			<!-- Post content -->
-			<?php
+	<?php wisus_post_thumbnail(); ?>
 
-			echo "<p class='my-3 fw-normal'>" . wp_trim_words( get_the_content(), 20 ) . "</p>";
+	<div class="entry-content">
+		<?php
+		the_content(
+			sprintf(
+				wp_kses(
+					/* translators: %s: Name of current post. Only visible to screen readers */
+					__( 'Continue reading<span class="screen-reader-text"> "%s"</span>', 'wisus' ),
+					array(
+						'span' => array(
+							'class' => array(),
+						),
+					)
+				),
+				wp_kses_post( get_the_title() )
+			)
+		);
 
-			?>
+		wp_link_pages(
+			array(
+				'before' => '<div class="page-links">' . esc_html__( 'Pages:', 'wisus' ),
+				'after'  => '</div>',
+			)
+		);
+		?>
+	</div><!-- .entry-content -->
 
-		</div>
-	</div>
-</div><!-- #post-<?php the_ID(); ?> -->
+	<footer class="entry-footer my-3 d-flex justify-content-between">
+		<?php wisus_entry_footer(); ?>
+	</footer><!-- .entry-footer -->
+</article><!-- #post-<?php the_ID(); ?> -->

@@ -46,13 +46,6 @@ function wisus_setup() {
 		*/
 	add_theme_support( 'post-thumbnails' );
 
-	// This theme uses wp_nav_menu() in one location.
-	register_nav_menus(
-		array(
-			'menu-1' => esc_html__( 'Primary', 'wisus' ),
-		)
-	);
-
 	/*
 		* Switch default core markup for search form, comment form, and comments
 		* to output valid HTML5.
@@ -141,22 +134,18 @@ function wisus_scripts() {
 	wp_enqueue_style( 'wisus-style', get_stylesheet_uri(), array(), _S_VERSION );
 	wp_style_add_data( 'wisus-style', 'rtl', 'replace' );
 
-    wp_enqueue_style('bootstrapCSS', get_template_directory_uri() . '/css/bootstrap.css', array(), '5.1.3');
-	wp_enqueue_style('fontawesome', 'https://use.fontawesome.com/releases/v5.15.4/css/all.css', array(), '5.15.4' );
+	wp_enqueue_style('bootstrap', get_template_directory_uri() . '/assets/css/bootstrap.css', array(), null );
+	wp_enqueue_script('bootstrap', get_template_directory_uri() . '/assets/js/bootstrap.min.js', array('jquery'), null, true );
 
-    // Font
-	wp_enqueue_style('googleFont', 'https://fonts.googleapis.com/css2?family=Mukta:wght@200;300;400;500;600;700;800&display=swap', array(), '1.0.0' );
-
-
-	wp_enqueue_script( 'wisus-navigation', get_template_directory_uri() . '/js/navigation.js', array(), _S_VERSION, true );
-    wp_enqueue_script( 'bootstrapJS', get_template_directory_uri() . '/js/bootstrap.min.js', array(), _S_VERSION, true );
-	wp_enqueue_script('customizer', get_template_directory_uri() . '/js/custom.js', array(), _S_VERSION, true);
+	wp_enqueue_script( 'wisus-navigation', get_template_directory_uri() . '/assets/js/navigation.js', array(), _S_VERSION, true );
 
 	if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
 		wp_enqueue_script( 'comment-reply' );
 	}
 }
 add_action( 'wp_enqueue_scripts', 'wisus_scripts' );
+
+
 
 /**
  * Implement the Custom Header feature.
@@ -179,24 +168,19 @@ require get_template_directory() . '/inc/template-functions.php';
 require get_template_directory() . '/inc/customizer.php';
 
 /**
+ * Bootstrap Nav Walker
+ */
+require get_template_directory() . '/inc/navbar-walker.php';
+
+/**
+ * Block for Gutenberg
+ */
+require get_template_directory() . '/inc/gutenberg-block.php';
+
+/**
  * Load Jetpack compatibility file.
  */
 if ( defined( 'JETPACK__VERSION' ) ) {
 	require get_template_directory() . '/inc/jetpack.php';
 }
 
-/**
- * Load WooCommerce compatibility file.
- */
-if ( class_exists( 'WooCommerce' ) ) {
-	require get_template_directory() . '/inc/woocommerce.php';
-}
-
-/**
- * Cargamos navegacion para menu con bootstrap
-*/
-require get_template_directory() . '/inc/wp_bootstrap_navwalker.php';
-require get_template_directory() . '/inc/wp_bootstrap_navwalker_footer.php';
-
-// Helper que se usa para cargar funciones y hooks personalizados
-require get_template_directory() . '/inc/helper.php';

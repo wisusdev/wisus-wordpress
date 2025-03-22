@@ -11,7 +11,11 @@
 
 ?>
 
-    <footer class="bg-black py-5">
+<?php 
+	$footerColor = get_theme_mod('wisus_footer_color', 'dark'); 
+?>
+
+	<footer class="bg-<?php echo esc_attr($footerColor); ?> py-5">
         <div class="container d-flex flex-wrap justify-content-between align-items-center py-3">
             <div class="col-md-4 d-flex align-items-center">
                 <span class="text-white fw-light text-small">Copyright © <?php echo date('Y') ?> · All rights reserved</span>
