@@ -37,7 +37,8 @@ function wisus_pingback_header() {
 add_action( 'wp_head', 'wisus_pingback_header' );
 
 /**
- * Column theme
+ * Theme options
+ * @param WP_Customize_Manager $wp_customize
  */
 
  function wisus_config_theme($wp_customize) {
@@ -176,6 +177,21 @@ add_action( 'wp_head', 'wisus_pingback_header' );
 }
 
 add_action('customize_register', 'wisus_config_theme');
+
+/**
+ * Agrega theme options al menu de personalización
+ */
+
+ function wisus_add_theme_options_page() {
+    add_theme_page(
+        __('Theme Options', 'wisus'), // Título de la página
+        __('Theme Options', 'wisus'), // Título del menú
+        'edit_theme_options',         // Capacidad requerida
+        'customize.php?autofocus[section]=wisus_layout_options' // URL del personalizador con la sección seleccionada
+    );
+}
+
+add_action('admin_menu', 'wisus_add_theme_options_page');
 
 // Se añade las clase para los botones de previo y siguiente en la pagination
 add_filter('next_posts_link_attributes', 'posts_link_attributes');
