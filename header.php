@@ -34,7 +34,10 @@
 		<a class="skip-link screen-reader-text" href="#primary"><?php esc_html_e('Skip to content', 'wisus'); ?></a>
 		<nav class="navbar navbar-expand-lg bg-<?php echo esc_attr($navbarColor); ?>" id="masthead">
 			<div class="container-fluid">
-				<?php the_custom_logo(); ?>
+
+				<div class="custom-logo-container">
+					<?php the_custom_logo(['class' => 'img-fluid']); ?>
+				</div>
 
 				<?php if (is_front_page() && is_home()) : ?>
 					<a class="navbar-brand" href="<?php echo esc_url(home_url('/')); ?>" rel="home"><?php bloginfo('name'); ?></a>
@@ -45,8 +48,9 @@
 				<?php $wisus_description = get_bloginfo('description', 'display');
 				if ($wisus_description || is_customize_preview()) :
 				?>
-					<p class="site-description"><?php echo $wisus_description; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped 
-												?></p>
+					<p class="site-description">
+						<?php echo $wisus_description; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+					</p>
 				<?php endif; ?>
 
 				<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#main-menu" aria-controls="main-menu" aria-expanded="false" aria-label="Toggle navigation">
