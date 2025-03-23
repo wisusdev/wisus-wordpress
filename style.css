@@ -32,3 +32,12 @@ Nicolas Gallagher and Jonathan Neal https://necolas.github.io/normalize.css/
 .components-panel__body {
     margin-bottom: 20px;
 }
+
+.custom-logo-container {
+    padding-right: 10px;
+}
+
+.custom-logo-container a img {
+    max-width: 50px;
+    height: auto;
+}
