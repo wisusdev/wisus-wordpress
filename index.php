@@ -15,7 +15,7 @@ get_header();
 	$columns = get_theme_mod( 'wisus_columns', 3 );
 	$sidebarEnabled = get_theme_mod( 'wisus_enable_sidebar', 'yes' );
 ?>
-	<main id="primary" class="site-main container py-4">
+	<main id="primary" class="site-main container pb-4">
 		<?php
 			if ( have_posts() ) :
 			if ( is_home()  ) :
