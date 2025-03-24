@@ -10,31 +10,47 @@
 get_header();
 ?>
 
+<?php
+	$sidebarEnabled = get_theme_mod( 'wisus_enable_sidebar', 'yes' );
+?>
     <main id="primary" class="site-main single-container container py-4">
+        <div class="row">
+            <div class="col">
+                <?php
+                while ( have_posts() ) :
+                    the_post();
 
-        <?php
-        while ( have_posts() ) :
-            the_post();
+                    get_template_part( 'template-parts/content' );
 
-            get_template_part( 'template-parts/content' );
+                    ?>
+                        <div class="d-grid gap-2 d-flex justify-content-between p-3 bg-body-secondary rounded mb-3">
+                            <div><?php echo get_next_post_link('%link') ?></div>
+                            <div><?php echo get_previous_post_link('%link') ?></div>
+                        </div>
+                    <?php
 
-            ?>
-				<div class="d-grid gap-2 d-flex justify-content-between p-3 bg-body-secondary rounded mb-3">
-					<div><?php echo get_next_post_link('%link') ?></div>
-					<div><?php echo get_previous_post_link('%link') ?></div>
-				</div>
-			<?php
+                    // If comments are open or we have at least one comment, load up the comment template.
+                    if ( comments_open() || get_comments_number() ) :
+                        comments_template();
+                    endif;
 
-            // If comments are open or we have at least one comment, load up the comment template.
-            if ( comments_open() || get_comments_number() ) :
-                comments_template();
-            endif;
-
-        endwhile; // End of the loop.
-        ?>
+                endwhile; // End of the loop.
+                ?>
+            </div>
+            <?php if( $sidebarEnabled === 'yes' ) { ?>
+                <div class="col-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <?php
+                                get_sidebar();
+                            ?>
+                        </div>
+                    </div>
+                </div>
+            <?php } ?>
+        </div>
 
     </main><!-- #main -->
 
 <?php
-get_sidebar();
 get_footer();
