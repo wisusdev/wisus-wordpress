@@ -1,4 +1,4 @@
-<article id="post-<?php the_ID(); ?>" <?php post_class(is_singular() && !is_front_page() ? '' : 'card h-100 mb-3'); ?>>
+<article id="post-<?php the_ID(); ?>" <?php post_class(is_singular() && !is_front_page() ? '' : 'card shadow border border-primary-subtle h-100 mb-3'); ?>>
 
     <header class="entry-header <?php echo is_singular() && !is_front_page() ? '' : 'card-header'; ?>">
         <?php
