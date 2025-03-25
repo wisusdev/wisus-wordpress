@@ -16,14 +16,16 @@ get_header();
     $sidebarEnabled = get_theme_mod( 'wisus_enable_sidebar');
     $containerFluidEnabled = get_theme_mod( 'wisus_container_fluid');
 ?>
-	<main id="primary" class="site-main pb-4 container<?php echo $containerFluidEnabled ? '-fluid' : ''; ?>">
+	<main id="primary" class="site-main py-4 container<?php echo $containerFluidEnabled ? '-fluid' : ''; ?>">
 		<?php
 			if ( have_posts() ) :
 			if ( is_home()  ) :
 		?>
+        <?php if(!empty(get_the_title())) { ?>
 		<header>
 			<h1 class="page-title mb-4"><?php single_post_title(); ?></h1>
 		</header>
+        <?php } ?>
 		<div class="row">
 			<div class="mb-3 <?php echo $sidebarEnabled ? 'col-md-8' : 'col-md-12'; ?>">
 				<div class="row row-cols-1 row-cols-md-<?php echo esc_attr( $columns ); ?> g-4">
