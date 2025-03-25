@@ -14,7 +14,8 @@
 
 <?php 
 	$navbarColor = get_theme_mod('wisus_header_color', 'primary'); 
-	$themeMode = get_theme_mod('wisus_color_theme', 'light'); 
+	$themeMode = get_theme_mod('wisus_color_theme', 'light');
+    $containerFluidEnabled = get_theme_mod( 'wisus_container_fluid');
 ?>
 
 <!doctype html>
@@ -33,7 +34,7 @@
 	<div id="page" class="site">
 		<a class="skip-link screen-reader-text" href="#primary"><?php esc_html_e('Skip to content', 'wisus'); ?></a>
 		<nav class="navbar navbar-expand-lg bg-<?php echo esc_attr($navbarColor); ?>" id="masthead">
-			<div class="container-fluid">
+			<div class="container<?php echo $containerFluidEnabled ? '-fluid' : ''; ?>">
 
 				<div class="custom-logo-container">
 					<?php the_custom_logo(['class' => 'img-fluid']); ?>
