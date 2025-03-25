@@ -10,15 +10,16 @@
 ?>
 
 <?php 
-    $titlePage = get_theme_mod('wisus_show_title_page', 'yes');
+    $titlePage = get_theme_mod('wisus_show_title_page');
+    $containerFluidEnabled = get_theme_mod( 'wisus_container_fluid');
 ?>
 
 <!-- content page -->
 <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
 	
-	<header class="entry-header card-header container">
+	<header class="entry-header card-header container<?php echo $containerFluidEnabled ? '-fluid' : ''; ?>">
 		<?php 
-			$titlePage == 'yes' ? the_title('<h1 class="entry-title">', '</h1>') : '';
+			$titlePage ?? the_title('<h1 class="entry-title">', '</h1>');
 		 ?>
 	</header><!-- .entry-header -->
 
