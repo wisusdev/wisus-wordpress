@@ -25,7 +25,6 @@
 	<meta charset="<?php bloginfo('charset'); ?>">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="profile" href="https://gmpg.org/xfn/11">
-
 	<?php wp_head(); ?>
 </head>
 
@@ -40,18 +39,20 @@
 					<?php the_custom_logo(['class' => 'img-fluid']); ?>
 				</div>
 
-				<?php if (is_front_page() && is_home()) : ?>
-					<a class="navbar-brand" href="<?php echo esc_url(home_url('/')); ?>" rel="home"><?php bloginfo('name'); ?></a>
-				<?php else : ?>
-					<a class="navbar-brand" href="<?php echo esc_url(home_url('/')); ?>" rel="home"><?php bloginfo('name'); ?></a>
-				<?php endif; ?>
+				<?php $wisus_description = get_bloginfo('description', 'display'); ?>
+				<?php $wisus_blog_name = get_bloginfo('name', 'display'); ?>
 
-				<?php $wisus_description = get_bloginfo('description', 'display');
-				if ($wisus_description || is_customize_preview()) :
-				?>
-					<p class="site-description">
-						<?php echo $wisus_description; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
-					</p>
+				<?php if (display_header_text()) : ?>
+					<a class="navbar-brand" href="<?php echo esc_url(home_url('/')); ?>" rel="home" <?php if (is_customize_preview()) : ?>data-customize-partial-id="blogname"<?php endif; ?>>
+						<?php if ($wisus_blog_name) : ?>
+							<?php echo esc_html($wisus_blog_name); ?>
+						<?php endif; ?>
+						<?php if ($wisus_description) : ?>
+							<small class="small fw-light fs-6 text-body-secondary" <?php if (is_customize_preview()) : ?>data-customize-partial-id="blogdescription"<?php endif; ?>>
+								<?php echo esc_html($wisus_description); ?>
+							</small>
+						<?php endif; ?>
+					</a>
 				<?php endif; ?>
 
 				<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#main-menu" aria-controls="main-menu" aria-expanded="false" aria-label="Toggle navigation">
