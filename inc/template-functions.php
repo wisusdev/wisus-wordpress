@@ -47,13 +47,11 @@ add_action('wp_head', 'wisus_pingback_header');
 
 function wisus_config_theme($wp_customize)
 {
-
 	// Add section for theme options
 	$wp_customize->add_section('wisus_layout_options', array(
 		'title' => __('Theme Options', 'wisus'),
 		'priority' => 30,
 	));
-
 
 	// Define bootstrap colors
 	$colors = array(
@@ -120,7 +118,6 @@ function wisus_config_theme($wp_customize)
 		),
 	));
 
-	// Add color theme
 	// Dark and light mode theme
 	$wp_customize->add_setting('wisus_color_theme', array(
 		'default' => 'light',
@@ -139,7 +136,6 @@ function wisus_config_theme($wp_customize)
 			'dark' => __('Dark', 'wisus'),
 		),
 	));
-
 
 	// Show title page
 	$wp_customize->add_setting('wisus_show_title_page', array(
@@ -243,7 +239,6 @@ add_filter('previous_post_link', 'filter_single_post_pagination', 10, 4);
 
 function better_comments($comment, $args, $depth)
 {
-
 	// Get correct tag used for the comments
 	if ('div' === $args['style']) {
 		$tag = 'div';
@@ -336,4 +331,44 @@ function better_comments($comment, $args, $depth)
 			// IMPORTANT: Note that we do NOT close the opening tag, WordPress does this for us
 			break;
 	endswitch; // End comment_type check.
+}
+
+// Hook para agregar la página al menú de Apariencia
+add_action('admin_menu', 'wisus_theme_documentation');
+
+function wisus_theme_documentation() {
+    // Agregar una página al menú de Apariencia
+    add_theme_page(
+        'Documentación del Tema', // Título de la página
+        'Documentación',          // Título del menú
+        'edit_theme_options',     // Capacidad requerida
+        'wisus-theme-documentation',     // Slug de la página
+        'wisus_theme_documentation_data' // Callback para mostrar el contenido
+    );
+}
+
+// Callback para mostrar el contenido de la página
+function wisus_theme_documentation_data() {
+    ?>
+    <div class="wrap">
+        <h1>Documentación del Tema</h1>
+        <p>Bienvenido a la documentación de tu tema. Aquí encontrarás información útil sobre cómo usarlo.</p>
+        
+        <h2>Shortcodes Disponibles</h2>
+        <ul>
+            <li><code>[getLastPost]</code> - Muestra los últimos 5 posts publicados.</li>
+            <li><code>[getLastPost category="slug"]</code> - Muestra los posts de una categoría específica (por slug o ID).</li>
+            <li><code>[getLastPost num="3"]</code> - Muestra los últimos 3 posts publicados.</li>
+            <li><code>[getLastPost order="ASC"]</code> - Muestra los posts en orden ascendente.</li>
+            <li><code>[getLastPost orderby="title"]</code> - Muestra los posts ordenados por título.</li>
+        </ul>
+        <h3>Atributos del Shortcode</h3>
+        <ul>
+            <li><strong>category</strong>: Filtra los posts por categoría (slug o ID).</li>
+            <li><strong>num</strong>: Número de posts a mostrar (por defecto: 5).</li>
+            <li><strong>order</strong>: Orden de los posts, puede ser <code>ASC</code> o <code>DESC</code> (por defecto: DESC).</li>
+            <li><strong>orderby</strong>: Campo por el cual se ordenan los posts, como <code>post_date</code>, <code>title</code>, etc. (por defecto: post_date).</li>
+        </ul>
+    </div>
+    <?php
 }
