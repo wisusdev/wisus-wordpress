@@ -23,7 +23,7 @@ get_header();
 		?>
         <?php if(!empty(get_the_title())) { ?>
 		<header>
-			<h1 class="page-title mb-4"><?php single_post_title(); ?></h1>
+			<h1 class="page-title mb-3"><?php single_post_title(); ?></h1>
 		</header>
         <?php } ?>
 		<div class="row">
