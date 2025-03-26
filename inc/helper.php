@@ -307,65 +307,74 @@ function change_logo_class( $html ) {
 
 /* SHORTCODE */
 add_shortcode('getLastPost', 'get_last_post');
-function get_last_post($atts, $content = null){
 
+function get_last_post($atts, $content = null) {
     global $post;
 
-    extract(shortcode_atts(array(
-        'cat'     => '',
-        'num'     => '5',
-        'order'   => 'DESC',
-        'orderby' => 'post_date',
-    ), $atts));
+    // Extraer los atributos del shortcode
+    $atts = shortcode_atts(array(
+        'category' => '', // Nombre de la categoría o ID
+        'num'      => '5', // Número de posts
+        'order'    => 'DESC', // Orden (ASC o DESC)
+        'orderby'  => 'post_date', // Campo para ordenar
+    ), $atts);
 
+    // Configurar los argumentos para la consulta
     $args = array(
-        'cat'            => $cat,
-        'posts_per_page' => $num,
-        'order'          => $order,
-        'orderby'        => $orderby,
+        'posts_per_page' => $atts['num'], // Número de posts
+        'order'          => $atts['order'], // Orden
+        'orderby'        => $atts['orderby'], // Campo para ordenar
     );
+
+    // Filtrar por categoría si se proporciona
+    if (is_numeric($atts['category'])) {
+        $args['cat'] = $atts['category']; // Filtrar por ID de categoría
+    } elseif (!empty($atts['category'])) {
+        $args['category_name'] = $atts['category']; // Filtrar por nombre de categoría
+    }
 
     $output = '';
 
+    // Obtener los posts
     $posts = get_posts($args);
 
-    foreach($posts as $post) {
-
+    foreach ($posts as $post) {
         setup_postdata($post);
 
-		$output .= '
-			<div class="col-md-4 mb-3">
-				<div class="card h-100 shadow ">
-					<div class="card-header">
-						<p class="text-capitalize m-1 fw-bold">' . get_the_date( get_option('date_format')) . '</p>
-					</div>
-	
-					<div class="overflow-hidden p-0 image-post">
-						<div class="post-thumbnail">
-							<a href="'. get_the_permalink() .'">
-								'. get_the_post_thumbnail(null, '', array('class' => 'img-fluid')) .'
-							</a>
-						</div>
-					</div>
-	
-					<div class="card-body">
-						<p class="entry-title card-title fw-bold"><a href="'. get_the_permalink() .'" rel="bookmark" class="text-decoration-none text-black">'. get_the_title() .'</a></p>
-						<!-- Post content -->
-						<p class="my-3 fw-normal">' . wp_trim_words( get_the_content(), 20 ) . '</p>
-					</div>
-				</div>
-			</div>
-		';
+        // Construir el HTML de salida
+        $output .= '
+            <div class="col-md-4 mb-3">
+                <div class="card h-100 shadow">
+                    <div class="card-header">
+                        <p class="text-capitalize m-1 fw-bold">' . get_the_date(get_option('date_format')) . '</p>
+                    </div>
+                    <div class="overflow-hidden p-0 image-post">
+                        <div class="post-thumbnail">
+                            <a href="' . get_the_permalink() . '">
+                                ' . get_the_post_thumbnail(null, '', array('class' => 'img-fluid')) . '
+                            </a>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <p class="entry-title card-title fw-bold">
+                            <a href="' . get_the_permalink() . '" rel="bookmark" class="text-decoration-none text-black">' . get_the_title() . '</a>
+                        </p>
+                        <p class="my-3 fw-normal">' . wp_trim_words(get_the_content(), 20) . '</p>
+                    </div>
+                </div>
+            </div>
+        ';
+		
+		if ($posts > $atts['num']){
+			$output .= '
+				<div class="col-12 d-flex justify-content-center my-3">
+						<a href="' .esc_url(site_url('/blog')) .'" class="btn btn-primary">Ver mas entradas <i class="fas fa-arrow-circle-right ms-2"></i></a>
+				</div>';
+		}
     }
-
-	if ($posts > $num){
-		$output .= '
-			<div class="col-12 d-flex justify-content-center my-3">
-					<a href="' .esc_url(site_url('/blog')) .'" class="btn btn-primary">Ver mas entradas <i class="fas fa-arrow-circle-right ms-2"></i></a>
-			</div>';
-	}
 
     wp_reset_postdata();
 
+    // Devolver el HTML generado
     return '<div class="row">' . $output . '</div>';
 }
